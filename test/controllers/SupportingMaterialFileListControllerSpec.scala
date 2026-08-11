@@ -115,7 +115,7 @@ class SupportingMaterialFileListControllerSpec extends ControllerSpecBase with Y
     }
 
     "displays error when trying to exceed max file upload" in {
-      val submitRequest = fakeRequest.withFormUrlEncodedBody(("add-file-choice", "true"))
+      val submitRequest = fakePOSTRequestWithCSRF.withFormUrlEncodedBody(("add-file-choice", "true"))
 
       val backgroundData = Map(
         ProvideGoodsNamePage.toString       -> JsString(goodsName),
@@ -148,7 +148,7 @@ class SupportingMaterialFileListControllerSpec extends ControllerSpecBase with Y
     }
 
     "allows user to proceed after they've added the maximum number of uploads" in {
-      val submitRequest = fakeRequest.withFormUrlEncodedBody(("add-file-choice", "false"))
+      val submitRequest = fakePOSTRequestWithCSRF.withFormUrlEncodedBody(("add-file-choice", "false"))
 
       val backgroundData = Map(
         ProvideGoodsNamePage.toString       -> JsString(goodsName),

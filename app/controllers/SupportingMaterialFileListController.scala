@@ -27,7 +27,7 @@ import play.api.data.{Form, FormError}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import play.twirl.api.HtmlFormat
 import service.DataCacheService
-import uk.gov.hmrc.play.bootstrap.controller.WithUnsafeDefaultFormBinding
+import uk.gov.hmrc.play.bootstrap.controller.WithUrlEncodedAndMultipartFormBinding
 import utils.Notification.{success, *}
 import viewmodels.FileView
 import views.html.supportingMaterialFileList
@@ -47,7 +47,7 @@ class SupportingMaterialFileListController @Inject() (
   supportingMaterialFileListView: supportingMaterialFileList
 )(implicit ec: ExecutionContext)
     extends AnswerCachingController[Boolean](cc)
-    with WithUnsafeDefaultFormBinding {
+    with WithUrlEncodedAndMultipartFormBinding {
   lazy val form: Form[Boolean]                          = formProvider()
   val questionPage: SupportingMaterialFileListPage.type = SupportingMaterialFileListPage
 

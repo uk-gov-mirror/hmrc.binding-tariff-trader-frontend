@@ -105,7 +105,7 @@ class RegisteredAddressForEoriControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(
+      val postRequest = fakePOSTRequestWithCSRF.withFormUrlEncodedBody(
         ("eori", "GB123"),
         ("businessName", "value 1"),
         ("addressLine1", "value 3"),
@@ -134,14 +134,16 @@ class RegisteredAddressForEoriControllerSpec extends ControllerSpecBase {
 
     gbCountryCombinations.foreach { country =>
       s"return a Bad Request and errors when invalid gb postcode with country passed like '$country' is submitted" in {
-        val postRequest = fakeRequest.withFormUrlEncodedBody(
-          ("eori", "GB123"),
-          ("businessName", "value 1"),
-          ("addressLine1", "value 3"),
-          ("townOrCity", "value 4"),
-          ("postcode", "value 5"),
-          ("country", country)
-        )
+        val postRequest = fakeRequest
+          .withMethod("POST")
+          .withFormUrlEncodedBody(
+            ("eori", "GB123"),
+            ("businessName", "value 1"),
+            ("addressLine1", "value 3"),
+            ("townOrCity", "value 4"),
+            ("postcode", "value 5"),
+            ("country", country)
+          )
 
         val boundForm = form.bind(
           Map(

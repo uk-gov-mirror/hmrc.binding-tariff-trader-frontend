@@ -28,7 +28,7 @@ import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import play.twirl.api.HtmlFormat
 import service.{CountriesService, DataCacheService}
-import uk.gov.hmrc.play.bootstrap.controller.WithUnsafeDefaultFormBinding
+import uk.gov.hmrc.play.bootstrap.controller.WithUrlEncodedOnlyFormBinding
 import views.html.registeredAddressForEori
 
 import javax.inject.Inject
@@ -48,7 +48,7 @@ class RegisteredAddressForEoriController @Inject() (
 )(implicit ec: ExecutionContext)
     extends AnswerCachingController[RegisteredAddressForEori](cc)
     with I18nSupport
-    with WithUnsafeDefaultFormBinding {
+    with WithUrlEncodedOnlyFormBinding {
 
   lazy val form: Form[RegisteredAddressForEori]       = formProvider()
   val questionPage: RegisteredAddressForEoriPage.type = RegisteredAddressForEoriPage
